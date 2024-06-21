@@ -1,5 +1,6 @@
 package com.pizzaria.poligonos.Domain.Cliente;
 
+import com.pizzaria.poligonos.Domain.Produto.ProdutoJPA;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
