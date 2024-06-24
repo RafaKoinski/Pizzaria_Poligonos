@@ -1,5 +1,6 @@
 package com.pizzaria.poligonos.Controller;
 
+import com.pizzaria.poligonos.Domain.Produto.AtualizaProduto;
 import com.pizzaria.poligonos.Domain.Produto.ListaProduto;
 import com.pizzaria.poligonos.Domain.Produto.Produto;
 import com.pizzaria.poligonos.Domain.Produto.ProdutoJPA;
@@ -33,5 +34,22 @@ public class ProdutoController {
     @GetMapping
     public ResponseEntity<Page<ListaProduto>> ListarProduto(@PageableDefault(sort = {"nome"}) Pageable pag){
         return ResponseEntity.ok(repository.findAllByAtivoTrue(pag).map(ListaProduto::new));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody @Valid AtualizaProduto dados){
+        var produto = repository.getReferenceById(dados.id());
+        produto.atualizarInformacoes(dados);
+        produto = repository.getReferenceById(dados.id());
+        return ResponseEntity.ok(new ProdutoJPA(produto));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        var produto = repository.getReferenceById(id);
+        produto.excluir();
+        return ResponseEntity.noContent().build();
     }
 }

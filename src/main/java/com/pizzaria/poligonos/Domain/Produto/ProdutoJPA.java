@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class ProdutoJPA {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -34,4 +35,21 @@ public class ProdutoJPA {
     public ProdutoJPA(ProdutoJPA produto) {
         this(produto.getId(), produto.getNome(), produto.getDescricao(), produto.getImagem(), produto.getGrupo(), produto.isAtivo());
     }
+
+    public void atualizarInformacoes(AtualizaProduto dados) {
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.descricao() != null){
+            this.descricao = dados.descricao();
+        }
+        if (dados.imagem() != null){
+            this.imagem = dados.imagem();
+        }
+        if (dados.grupo() != null){
+            this.grupo = dados.grupo();
+        }
+    }
+
+    public void excluir(){ this.ativo = false; }
 }
