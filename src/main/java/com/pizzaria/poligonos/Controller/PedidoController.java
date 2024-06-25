@@ -39,7 +39,7 @@ public class PedidoController {
         var pedido = repository.getReferenceById(dados.id());
         pedido.atualizarInformacoes(dados);
         pedido = repository.getReferenceById(dados.id());
-        return ResponseEntity.ok(new PedidoJPA(pedido));
+        return ResponseEntity.ok(new DetalhesPedido(pedido));
     }
 
     @DeleteMapping("/{id}")
