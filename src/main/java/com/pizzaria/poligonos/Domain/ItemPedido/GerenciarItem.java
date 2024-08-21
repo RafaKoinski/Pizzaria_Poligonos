@@ -6,6 +6,8 @@ import com.pizzaria.poligonos.Repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GerenciarItem {
 
@@ -18,6 +20,7 @@ public class GerenciarItem {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+
     public ItemPedidoJPA incluir(ItemPedido dados){
         var pedido = pedidoRepository.getReferenceById(dados.id_pedido());
         var produto = produtoRepository.getReferenceById(dados.id_produto());
@@ -25,10 +28,10 @@ public class GerenciarItem {
         itemPedidoRepository.save(itemdosPedido);
         return new ItemPedidoJPA(itemdosPedido);
     }
-    public ItemPedidoJPA listar(Long id){
+    public List<ItemPedidoJPA> listar(Long id){ //Mudar aqui para o retorno ser uma lista e não um Item JPA
         var pedido = pedidoRepository.getReferenceById(id);
         var id_pedido = pedido.getId();
-        var listaItem = itemPedidoRepository.findAllById_pedido(id_pedido);
-        return  new ItemPedidoJPA(listaItem);
+        List<ItemPedidoJPA> listaItem = itemPedidoRepository.findAllById_pedido(id_pedido);
+        return listaItem;
     }
 }
