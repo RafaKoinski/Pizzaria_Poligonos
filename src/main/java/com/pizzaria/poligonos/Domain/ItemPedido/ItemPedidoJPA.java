@@ -22,7 +22,7 @@ public class ItemPedidoJPA {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
-    private PedidoJPA id_pedido;
+    private PedidoJPA pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
@@ -33,7 +33,7 @@ public class ItemPedidoJPA {
     private float preco;
 
     public ItemPedidoJPA(ItemPedidoJPA itemPedido) {
-        this(itemPedido.getId(), itemPedido.getId_pedido(), itemPedido.getProduto(), itemPedido.getQuantidade(), itemPedido.getPreco());
+        this(itemPedido.getId(), itemPedido.getPedido(), itemPedido.getProduto(), itemPedido.getQuantidade(), itemPedido.getPreco());
     }
 
 }

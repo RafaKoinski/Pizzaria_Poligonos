@@ -14,7 +14,7 @@ public interface ItemPedidoRepository extends JpaRepository<ItemPedidoJPA, Long>
     @Query("""
             SELECT i FROM itempedidos i
             WHERE
-            i.id_pedido.id = :pedido
+            i.pedido.id = :pedido
             """)
     List<ItemPedidoJPA> findAllById_pedido(Long pedido);
 
